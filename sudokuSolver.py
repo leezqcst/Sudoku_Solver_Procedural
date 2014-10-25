@@ -53,7 +53,7 @@ if matrix.shape != (9,9) or\
 print('\nThis is the given sudoku:\n\n')
 sdk.sudokuPrinter(matrix)
 
-print('Please, wait while solving\n...\n')
+print('Please, wait while solving ...\n')
 solution = sdk.sudokuSolver(matrix)
     
 print('Solving process already done')

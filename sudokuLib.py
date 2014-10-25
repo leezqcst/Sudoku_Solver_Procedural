@@ -77,12 +77,10 @@ solution = None
 
 def sudokuSolver(matrix):
     ''' 
-    This sudoku solver is based on recursive backtracking algorithm 
-    described in [1] using the better description available in the 
-    spanish version [2].
+    This sudoku solver algorithm is based on the recursive backtracking 
+    algorithm described in [1].
 
-    [1] http://en.wikipedia.org/wiki/Sudoku_solving_algorithms
-    [2] http://es.wikipedia.org/wiki/Sudoku_backtracking
+    [1] http://es.wikipedia.org/wiki/Sudoku_backtracking
     
     Parameters
     ----------
@@ -118,7 +116,9 @@ def solverRec(i,j, matrix, matbool, lock):
         It reflects the initial state. True indicates initial values that
         must not be changed. False indicates that the value could be changed.
     '''
-
+    
+    global solution
+    
     if matbool[i,j] == False:
         
         for k in range(1,10):
@@ -131,7 +131,6 @@ def solverRec(i,j, matrix, matbool, lock):
                len(find(mySquare(matrix,i,j) == k)) == 1:              
                
                if i == 8 and j == 8:
-                   global solution
                    solution = matrix.copy()
                elif i < 8 and j == 8:
                    solverRec(i+1, 0, matrix, matbool, lock)
@@ -142,7 +141,6 @@ def solverRec(i,j, matrix, matbool, lock):
     else:
         
         if i == 8 and j == 8:
-            global solution
             solution = matrix.copy()
         elif i < 8 and j == 8:
             solverRec(i+1, 0, matrix, matbool, lock)
@@ -197,7 +195,10 @@ def pause():
         os.system('pause')
     elif platform == 'linux' or platform == 'linux2':
         print('Press Enter to continue ...'),
-        raw_input()
+        try:
+            raw_input()
+        except:
+            pass
       
     print('\n')
   

@@ -9,6 +9,7 @@ Created on Wed Oct 22 21:24:36 2014
 import os
 import numpy as np
 from matplotlib.mlab import find
+from sys import platform
 
 
 def sudokuPrinter(matrix):
@@ -72,6 +73,7 @@ def mySquare(matrix, a, b):
     return squares[c,d]
     
     
+solution = None
 
 def sudokuSolver(matrix):
     ''' 
@@ -87,13 +89,20 @@ def sudokuSolver(matrix):
     matrix: array_like
         It contains the sudoku matrix.
     '''
-
+    
     matbool = matrix != 0
-    solverRec(0,0, matrix, matbool)
+    #solution = matrix.copy()
+    global solution
+    solution = np.empty(shape=(9,9))
+    lock = False
+    
+    solverRec(0,0, matrix, matbool, lock)
+    
+    return solution
 
 
 
-def solverRec(i,j, matrix, matbool): 
+def solverRec(i,j, matrix, matbool, lock): 
     '''
     This is a helper recursive function used by sudokuSolver.
     
@@ -108,34 +117,37 @@ def solverRec(i,j, matrix, matbool):
     matbool: array_like
         It reflects the initial state. True indicates initial values that
         must not be changed. False indicates that the value could be changed.
-   '''
-    
+    '''
+
     if matbool[i,j] == False:
         
         for k in range(1,10):
-              
+            
+            matrix[i,j] = k
+            
             #checking if value is plausible in row, col and square
-            if not k in matrix[i,:] and \
-               not k in matrix[:,j] and \
-               not k in mySquare(matrix,i,j):
-               
-               matrix[i,j] = k
+            if len(find(matrix[i,:] == k)) == 1 and \
+               len(find(matrix[:,j] == k)) == 1 and \
+               len(find(mySquare(matrix,i,j) == k)) == 1:              
                
                if i == 8 and j == 8:
-                    return
+                   global solution
+                   solution = matrix.copy()
                elif i < 8 and j == 8:
-                    solverRec(i+1, 0, matrix, matbool)
+                   solverRec(i+1, 0, matrix, matbool, lock)
                else:
-                    solverRec(i, j+1, matrix, matbool)
-                       
+                   solverRec(i, j+1, matrix, matbool, lock)
+                
+            matrix[i,j] = 0       
     else:
         
         if i == 8 and j == 8:
-            return
+            global solution
+            solution = matrix.copy()
         elif i < 8 and j == 8:
-            solverRec(i+1, 0, matrix, matbool)
+            solverRec(i+1, 0, matrix, matbool, lock)
         else:
-            solverRec(i, j+1, matrix, matbool)    
+            solverRec(i, j+1, matrix, matbool, lock)    
        
        
 def sudokuChecker(matrix):
@@ -174,16 +186,18 @@ def sudokuChecker(matrix):
                    
         return valid
 
-#TODO, buscar mecanismo alternativo al try/catch, que no acaba de funcionar
+
 def pause():
     '''
-    This function pause the execution until the user press any key to continue.
+    This function pause the execution until the user press any key to continue
+    \n(in Windows) or press Enter (in Linux)
     '''
     
-    try:
-        os.system('pause')  #windows
-    except:
-        os.system('read -p "Press any key to continue"') #linux
+    if platform == 'win32':
+        os.system('pause')
+    elif platform == 'linux' or platform == 'linux2':
+        print('Press Enter to continue ...'),
+        raw_input()
       
     print('\n')
   

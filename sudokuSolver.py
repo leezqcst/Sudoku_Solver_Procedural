@@ -54,28 +54,13 @@ print('\nThis is the given sudoku:\n\n')
 sdk.sudokuPrinter(matrix)
 
 print('Please, wait while solving\n...\n')
-
-
-
-try:
-    sdk.sudokuSolver(matrix)
-except:
-    e = sys.exc_info()[0]
-    print("The solver has unexpectedly crashed. \nBecause it uses recursive functions, \
-    the most probable reason is that the sudoku level was too hard and this process \
-    was run out of memory. We suggest to try with an easier sudoku or run this software \
-    in a machine with more RAM.\n\n The system returns the following message:\n" \
-    + e)
-    sdk.pause()
-    sys.exit(1)     
-    
-    
+solution = sdk.sudokuSolver(matrix)
     
 print('Solving process already done')
 sdk.pause()
 
 print('This is the solved sudoku:\n\n')
-sdk.sudokuPrinter(matrix)
+sdk.sudokuPrinter(solution)
 sdk.pause()
 
 print('Saving in ' + csv_output_path + ' ...\n')
@@ -83,7 +68,7 @@ print('Saving in ' + csv_output_path + ' ...\n')
 
 
 try:
-    np.savetxt(csv_output_path, matrix, fmt='%d', delimiter=',')
+    np.savetxt(csv_output_path, solution, fmt='%d', delimiter=',')
 except IOError as e:
     print('There was an IO error trying to write in path: ' + csv_output_path + \
     '\nThe system returns: ' + e.strerror)

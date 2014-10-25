@@ -28,8 +28,7 @@ An example of use:
 > 002|807|100 
 >
 >
->Please, wait while solving
->...
+>Please, wait while solving ...
 >
 >Solving process already done
 >Presione una tecla para continuar . . . 

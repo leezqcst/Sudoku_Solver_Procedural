@@ -24,9 +24,17 @@ csv_output_path = sys.argv[2]
 
 try:
     matrix = np.loadtxt(csv_input_path, delimiter=',').astype('int');
+    
 except IOError as e:
-    print('There was an IO error trying to read in path: ' + csv_input_path + \
-    '\nThe system returns: ' + e.strerror)
+    print('There was an I/O error trying to read in path: ' + csv_input_path + \
+    '.\nThe system returns: ' + e.strerror + '\nPlease check the path is correct\n')
+    sdk.pause()
+    sys.exit(1)
+    
+except:
+    print('There was an error trying to convert the file into an integer matrix.'\
+    + '\nPlease check if there is any empty space between commas or any '\
+    ' non-proper symbol.')
     sdk.pause()
     sys.exit(1)
 

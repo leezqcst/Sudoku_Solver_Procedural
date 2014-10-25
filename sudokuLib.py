@@ -65,8 +65,9 @@ def mySquare(matrix, a, b):
     squares = np.swapaxes(matrix.reshape(3,3,3,-1),1,2)    
     
     #mapping indexes a,b in matrix to c,d in squares
-    c = [x for x in range(1,4) if 3*x>a][0]-1
-    d = [x for x in range(1,4) if 3*x>b][0]-1
+    equiv = {0: [0,1,2], 1: [3,4,5], 2: [6,7,8]}
+    c = [key for key in equiv if a in equiv[key]][0]
+    d = [key for key in equiv if b in equiv[key]][0]
     
     return squares[c,d]
     
@@ -156,7 +157,7 @@ def sudokuChecker(matrix):
     
     valid = True
     
-    if len(find(matrix == 0)) != 0:
+    if len( np.hstack((find(matrix <1), find(matrix > 9))) ) != 0:
         valid = False
         return valid
         

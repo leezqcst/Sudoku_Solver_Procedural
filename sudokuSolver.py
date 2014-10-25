@@ -14,7 +14,7 @@ import sudokuLib as sdk
 #---------------------#
 
 if len(sys.argv) != 3:
-    print('Invalid input. Usage: python sudoku_solver.py CSV_INPUT_PATH CSV_OUTPUT_PATH')
+    print('Invalid input. Usage: python sudokuSolver.py CSV_INPUT_PATH CSV_OUTPUT_PATH')
     sdk.pause()
     sys.exit(1)
 

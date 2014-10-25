@@ -3,7 +3,7 @@ Sudoku_Solver_Procedural
 
 This is the procedural version of a sudoku solver I developed for the Insight Data Engineering Fellows Program.
 
-The solver algorithm is based on the recursive backtracking algorithm described in [1].
+The solver algorithm is based on the recursive backtracking algorithm described in [1](#Bib).
 
 In **sudokus_for_testing** directory there are sudokus of different complexity levels for testing the application.
 
@@ -61,4 +61,5 @@ An example of use:
 >>>> 
 >~~~
 
+#Bib
 [1] http://es.wikipedia.org/wiki/Sudoku_backtracking

@@ -89,18 +89,14 @@ def sudokuSolver(matrix):
     '''
     
     matbool = matrix != 0
-    #solution = matrix.copy()
-    global solution
-    solution = np.empty(shape=(9,9))
-    lock = False
     
-    solverRec(0,0, matrix, matbool, lock)
+    solverRec(0,0, matrix, matbool)
     
     return solution
 
 
 
-def solverRec(i,j, matrix, matbool, lock): 
+def solverRec(i,j, matrix, matbool): 
     '''
     This is a helper recursive function used by sudokuSolver.
     
@@ -133,9 +129,9 @@ def solverRec(i,j, matrix, matbool, lock):
                if i == 8 and j == 8:
                    solution = matrix.copy()
                elif i < 8 and j == 8:
-                   solverRec(i+1, 0, matrix, matbool, lock)
+                   solverRec(i+1, 0, matrix, matbool)
                else:
-                   solverRec(i, j+1, matrix, matbool, lock)
+                   solverRec(i, j+1, matrix, matbool)
                 
             matrix[i,j] = 0       
     else:
@@ -143,9 +139,9 @@ def solverRec(i,j, matrix, matbool, lock):
         if i == 8 and j == 8:
             solution = matrix.copy()
         elif i < 8 and j == 8:
-            solverRec(i+1, 0, matrix, matbool, lock)
+            solverRec(i+1, 0, matrix, matbool)
         else:
-            solverRec(i, j+1, matrix, matbool, lock)    
+            solverRec(i, j+1, matrix, matbool)    
        
        
 def sudokuChecker(matrix):

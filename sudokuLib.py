@@ -40,7 +40,6 @@ def sudokuPrinter(matrix):
     print '\n'
 
 
-
 def mySquare(matrix, a, b):
     '''
     This function returns the square to which the variable in coordinates 
@@ -71,7 +70,7 @@ def mySquare(matrix, a, b):
     d = [key for key in equiv if b in equiv[key]][0]
     
     return squares[c,d]
-    
+
     
 solution = None
 
@@ -93,7 +92,6 @@ def sudokuSolver(matrix):
     solverRec(0,0, matrix, matbool)
     
     return solution
-
 
 
 def solverRec(i,j, matrix, matbool): 
@@ -219,7 +217,8 @@ def sudokuInputChecker(matrix):
                        valid = False
                    
         return valid
-            
+        
+        
 def pause():
     '''
     This function pause the execution until the user press any key to continue

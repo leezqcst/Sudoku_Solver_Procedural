@@ -181,6 +181,45 @@ def sudokuChecker(matrix):
         return valid
 
 
+def sudokuInputChecker(matrix):
+    '''
+    inputChecker takes a sudoku and return True if it is a valid initial
+    sudoku, i.e. it's shape is 9x9 and it meets all the rules for non-zero values.
+    
+    Parameters
+    ----------   
+    matrix: array_like
+            `matrix` is a numpy.array that contains a 9x9 sudoku.
+            
+    Returns
+    -------
+    valid : bool
+        If the input matrix is correct, a True value will be returned.
+    '''
+    
+    valid = True
+    
+    if matrix.shape != (9,9) or\
+        matrix.min() < 0 or \
+        matrix.max() > 9:
+            
+        valid = False
+        return valid
+        
+    for i in range(0,9):
+        for j in range(0,9):
+            
+            k = matrix[i,j]
+            
+            if k != 0:
+                if len(find(matrix[i,:] == k)) > 1 or \
+                   len(find(matrix[:,j] == k)) > 1 or \
+                   len(find(mySquare(matrix,i,j) == k)) > 1:
+                       
+                       valid = False
+                   
+        return valid
+            
 def pause():
     '''
     This function pause the execution until the user press any key to continue

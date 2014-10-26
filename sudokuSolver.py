@@ -38,12 +38,10 @@ except:
     sdk.pause()
     sys.exit(1)
 
-if matrix.shape != (9,9) or\
-    matrix.min() < 0 or \
-    matrix.max() > 9:
-        
-    print('Sorry, this sudoku solver only works with the standard sudoku version' \
-    + ' of a 9x9 grid with values between 1 and 9, using 0 as a blank box')
+if not sdk.sudokuInputChecker(matrix):
+    print('Sorry, this sudoku does not comply with one or more of the following '\
+     + 'rules:\nBeing a 9x9 grid\nHaving numbers from 0 to 9\nNon-zero '\
+     + "values can't be repeated in the same column, row or 3x3 square")
     sdk.pause()
     sys.exit(1)
 
